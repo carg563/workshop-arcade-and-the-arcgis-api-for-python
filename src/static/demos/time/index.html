@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <title>MapImageLayer - nowcoast</title>
+
+    <link
+      rel="stylesheet"
+      href="https://jsdev.arcgis.com/4.12/esri/css/main.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://jsdev.arcgis.com/4.12"></script>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+
+      #infoDiv {
+        background-color: white;
+        padding: 10px;
+        width: 320px;
+        height: 40px;
+      }
+    </style>
+
+    <script>
+      require([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/layers/MapImageLayer",
+        "esri/core/watchUtils"
+      ], function(Map, MapView, MapImageLayer, watchUtils) {
+        var startDate, endDate, layerEndDate;
+        var animation = null;
+        var unit = "day",
+          value = 1;
+
+        var map = new Map({
+          basemap: "gray"
+        });
+
+        var view = new MapView({
+          container: "viewDiv",
+          map: map,
+          zoom: 4,
+          center: [-100, 40]
+        });
+        view.ui.add("infoDiv", "bottom-left");
+
+        var layer = new MapImageLayer({
+          // url: "https://nowcoast.noaa.gov/arcgis/rest/services/nowcoast/analysis_ocean_sfc_sst_time/MapServer"
+          url:
+            "https://livefeeds.arcgis.com/arcgis/rest/services/LiveFeeds/NDFD_Precipitation/MapServer"
+        });
+        map.add(layer);
+
+        view.whenLayerView(layer).then(function(layerView) {
+          console.log(layer.timeInfo);
+          watchUtils.whenFalseOnce(layerView, "updating", function() {
+            startDate = moment.utc(layer.timeInfo.fullTimeExtent.start);
+            layerEndDate = moment.utc(layer.timeInfo.fullTimeExtent.end);
+            if (layer.timeInfo.interval) {
+              unit = layer.timeInfo.interval.unit;
+              value = layer.timeInfo.interval.value;
+            }
+
+            endDate = startDate.clone().add(value, unit);
+            startAnimation();
+          });
+        });
+
+        function updateTimeExtent() {
+          if (endDate.isSameOrAfter(layerEndDate)) {
+            endDate = moment.utc(layer.timeInfo.fullTimeExtent.start);
+          }
+
+          var timeExtent = {
+            start: startDate,
+            end: endDate
+          };
+
+          view.timeExtent = timeExtent;
+          startDate = endDate.clone();
+          endDate = endDate.clone().add(value, unit);
+
+          document.getElementById("infoDiv").innerHTML =
+            startDate.format("MM/DD/YYYY hh:mm A") +
+            " - " +
+            endDate.format("MM/DD/YYYY hh:mm A");
+        }
+
+        function startAnimation() {
+          stopAnimation();
+          animation = animate();
+        }
+
+        function stopAnimation() {
+          if (!animation) {
+            return;
+          }
+          animation.remove();
+          animation = null;
+        }
+
+        function animate() {
+          var animating = true;
+          function updateStep() {
+            if (!animating) {
+              return;
+            }
+            updateTimeExtent();
+            setTimeout(function() {
+              requestAnimationFrame(updateStep);
+            }, 1000);
+          }
+          requestAnimationFrame(updateStep);
+
+          return {
+            remove: function() {
+              animating = false;
+            }
+          };
+        }
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+    <div id="infoDiv" class="esri-widget"></div>
+  </body>
+</html>

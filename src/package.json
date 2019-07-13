@@ -1,0 +1,24 @@
+{
+  "name": "galopx-development",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "calcite-react": "^0.35.0",
+    "mdx-deck-code-surfer": "^0.5.5"
+  },
+  "devDependencies": {
+    "mdx-deck": "^2.5.0",
+    "prettier": "^1.18.2"
+  },
+  "scripts": {
+    "start": "mdx-deck -p 8081 deck.mdx",
+    "build": "mdx-deck build deck.mdx && npm run copy",
+    "copy": "npm run copy:static && npm run copy:public",
+    "copy:static": "cp -R static/ dist/static/",
+    "copy:public": "cp -R public/ dist/",
+    "help": "mdx-deck"
+  },
+  "author": "Grant Carroll <gsc@eagle.co.nz>",
+  "license": "ISC"
+}

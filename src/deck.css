@@ -1,0 +1,27 @@
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  line-height: 1 !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: normal;
+  color: #007ac2;
+}
+
+pre {
+  font-size: 1.2rem;
+}
+
+/***
+  Colors 
+  Green: #35ac46
+  Blue: #007ac2
+*/
