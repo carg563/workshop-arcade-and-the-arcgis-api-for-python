@@ -14,13 +14,11 @@ const Provider = ({ children }) => {
         <CalciteThemeProvider>
             <TopNav>
                 <TopNavBrand href={getLink(0)} src="/static/assets/esri-logo-black.svg" />
-                <TopNavTitle href={getLink(0)}>GALoPx Development</TopNavTitle>
+                <TopNavTitle href={getLink(0)}>Arcade & ArcGIS API for Python</TopNavTitle>
                 <TopNavList>
                     <TopNavLink href={getLink(0)} active={isActive([0, 26])}>Intro</TopNavLink>
-                    <TopNavLink href={getLink(0)} active={isActive([27, 59])}>Python</TopNavLink>
-                    <TopNavLink href={getLink(0)} active={isActive([60, 79])}>Arcade</TopNavLink>
-                    <TopNavLink href={getLink(0)} active={isActive([80, 89])}>Web AppBuilder</TopNavLink>
-                    <TopNavLink href={getLink(0)} active={isActive([80, 89])}>Custom Widgets</TopNavLink>
+                    <TopNavLink href={getLink(0)} active={isActive([27, 59])}>Arcade</TopNavLink>
+                    <TopNavLink href={getLink(0)} active={isActive([60, 79])}>Python</TopNavLink>
                     <TopNavLink href={getLink(0)} active={isActive([90, 1000])}>Resources</TopNavLink>
                 </TopNavList>            
             </TopNav>
