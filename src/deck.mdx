@@ -24,94 +24,560 @@ export const themes = [highlight, theme];
 
 ---
 
-# [arcade-and-the-arcgis-api-for-python](https://arcade-and-the-arcgis-api-for-python.netlify.com/)
+## Good Morning!
 
 ---
 
-# Good Morning!
+## But first, 👋🏼 I'm Grant.
 
 ---
 
-# Who's here?
-> What are we expecting
+## I work in Professional Services
 
 ---
 
-# Have we done any development?
-
----
-
-# What are we using it for?
-
----
-
-# Less talk
-
-# More workshop
-
----
-
-# Agenda
-
-- Overview of Development within ArcGIS
-
-- Arcade
-	-- Introduction
-	-- Structure and Logic
-	-- Type System
-	-- Profiles
-	
-- Python
-
-
----
-
-# But first, 👋🏼 I'm Grant.
-
----
-
-# I work in Professional Services
-
----
-
-# ~15 years working with ArcGIS
+## ~17 years working with ArcGIS
 
 > 2 1/2 Years at Eagle
 
 ---
 
-# I've written in 
-
-- Java
-
-- VB.NET
-
-- C#
-
-- Objective C
-
-- JavaScript
+## This is Ryan 👋🏼 
 
 ---
 
-> I mostly develop in C# and Javascript now
+## Technical Support Consultant
+> 18 months at Eagle
 
 ---
 
-# I'm lead developer on LocalMaps.
-
----
-# Arcade
-
----
-
-# Introduction
-
----
-# Python
+## Who's here?
+> What are we expecting
 
 ---
 
-# Hope you enjoyed the workshop!
+## Have we done any development?
 
-> [arcade-and-the-arcgis-api-for-python](https://arcade-and-the-arcgis-api-for-python.netlify.com/)
+---
+
+## What are we using it for?
+
+---
+
+## Less talk
+
+## More workshop
+
+
+---
+
+# Agenda - Python
+1. Introduction to ArcGIS API for Python
+
+2. User admin workflows with Python
+
+3. Adding and updating content
+
+---
+
+# Agenda - Arcade
+1. Introduction to Arcade
+
+2. Arcade in Popups
+
+3. Advanced Arcade
+
+4. Arcade in Pro
+
+---
+
+## Before we start
+
+- We will be using a [Notebook](https://eaglelabs.maps.arcgis.com/) server
+
+- Link is in the resources section
+
+- Resources all has help links
+
+---
+
+## Login details
+
+Your first initial followed by an _x_ and your last initial
+
+Ryan Cooper = rxc 
+
+Grant Carroll = gxc
+
+Password is _gis12345_
+
+---
+## Python
+
+---
+
+## Overview of the API
+
+- A Pythonic GIS API
+
+--- 
+
+## Architecture of the API
+
+<img src="/static/assets/guide_api_overview_modules.png" style={{ height: '300px' }} />
+
+---
+
+## The GIS Module
+
+The gis module is the most important and provides the entry point into the GIS. 
+It lets you manage users, groups and content in the GIS. 
+GIS admins spend a lot of time on this module.
+
+---
+
+## Spatial Modules
+
+The modules in green are used to access the various spatial capabilities or geographic datasets in the GIS. These modules include a family of geoprocessing functions, types and other helper objects for working with spatial data of a particular type.
+
+---
+
+## Enhanced Functionality
+
+The modules in blue provide additional functionality for your workflows. They include the geocoding module which is for finding places, the geometry module for representing the geometries of feature data and functions for working with them, the geoprocessing module that makes it easy to import third party geoprocessing tools and work with them and the geoenrichment module that helps you enrich your datasets with thematic information.
+
+---
+
+## Visualization
+
+The modules in orange allow you to visualize and disseminate your GIS data and analysis. The widgets module includes the MapView Jupyter notebook widget for visualizing maps and layers, the mapping module has types and functions for working with web maps and web layers and the apps module helps you create and manage web applications built with ArcGIS.
+
+---
+
+```python
+arcgis.gis
+```
+ module provides an information model for GIS hosted within ArcGIS Online or Portal for ArcGIS. This module provides functionality to manage (create, read, update and delete) GIS users, groups and content. This module is the most important and provides the entry point into the GIS.
+
+---
+```python
+arcgis.env 
+``` 
+provides a shared environment used by the different modules. It stores globals such as the currently active GIS as well as environment settings that are common among all geoprocessing tools, such as the output spatial reference.
+
+---
+
+```python
+arcgis.features
+```
+Entities located in space with a geometrical representation (such as points, lines or polygons) and a set of properties can be represented as features. The arcgis.features module is used for working with feature data, feature layers and collections of feature layers in the GIS. It also contains the spatial analysis functions which operate against feature data.
+
+---
+
+```python
+arcgis.raster
+```
+Raster data is made up of a grid of cells, where each cell or pixel can have a value. Raster data is useful for storing data that varies continuously, as in a satellite image, a surface of chemical concentrations, or an elevation surface. The arcgis.raster module contains classes and raster analysis functions for working with raster data and imagery layers.
+
+---
+
+```python
+arcgis.network
+``` 
+contains classes and functions for network analysis. Network layers and analysis can be used for operations such as finding the closest facility, the best route for a vehicle, the best routes for a fleet of vehicles, locating facilities using location allocation, calculating an OD cost matrix, and generating service areas.
+
+---
+
+```python
+arcgis.schematics 
+```
+Schematics are simplified representations of networks, intended to explain their structure and make the way they operate understandable. The arcgis.schematics module contains the types and functions for working with schematic layers and datasets.
+
+---
+
+```python
+arcgis.geoanalytics
+``` 
+provides types and functions for distributed analysis of large feature and tabular datasets. These GeoAnalytics tools work with big data registered in the GIS’s datastores as well as with feature layers.
+
+---
+
+```python
+arcgis.geocoding
+``` 
+provides classes and functions for geocoding, batch geocoding and reverse geocoding. Geocoders can find point locations of addresses, business names, and so on. The output points can be visualized on a map, inserted as stops for a route, or loaded as input for spatial analysis.
+
+---
+
+```python
+arcgis.geometry
+```
+ defines useful geometry types for working with geographic information and GIS functionality. It provides functions which use geometric types as input and output as well as functions for easily converting geometries between different representations.
+
+---
+
+```python
+arcgis.geoenrichment
+```
+provides the ability to get facts about a location or area. Using GeoEnrichment, you can get information about the people and places in a specific area or within a certain distance or drive time from a location. You can use this data to enhance the accuracy of your predictive models or better explain the inferences you gain from them.
+
+---
+
+```python
+arcgis.geoprocessing
+```
+Users can create and share geoprocessing tools in the GIS. The arcgis.geoprocessing module provides helper types with dynamically created methods to invoke these tools, and provides simple types that can be used as parameters for these tools along with native Python types.
+
+---
+
+```python
+arcgis.realtime
+``` 
+module provides types and functions for receiving real-time data feeds and sensor data streamed from the GIS to perform continuous processing and analysis. It includes support for stream layers that allow Python scripts to subscribe to the streamed feature data or broadcast updates or alerts.
+
+---
+
+```python
+arcgis.mapping
+```  
+module provides components for visualizing GIS data and analysis. This module includes WebMap and WebScene components that enable 2D and 3D mapping and visualization in the GIS. This module also includes mapping layers like MapImageLayer and VectorTileLayer
+
+---
+
+```python
+arcgis.widgets
+``` 
+module provides components for visualizing GIS data and analysis. This module includes the MapView Jupyter notebook widget for visualizing maps and layers
+
+---
+
+```python
+arcgis.apps 
+``` 
+module allows you to manage some of the web based applications available in ArcGIS.
+
+---
+
+
+## Benefits of Python automation
+
+<img src="/static/assets/python-automation.png" style={{ height: '400px' }} />
+
+---
+
+## Script Creation Workflow
+
+<img src="/static/assets/script-creation.png" style={{ height: '400px' }} />
+
+---
+
+## Understanding Parameters
+
+<img src="/static/assets/understanding-parameters.png" style={{ height: '300px' }} />
+
+---
+
+## Troubleshooting Techniques
+
+<img src="/static/assets/trouble-shooting.png" style={{ height: '300px' }} />
+
+---
+
+## Our scenario
+
+- New GIS Admin in the Job
+
+- Responsible for cleaning up Enterprise
+
+- Need to do some clean up within the Enterprise
+
+
+---
+
+<img src="/static/assets/demo-guy.png" style={{ height: '400px' }} />
+
+## [Module Two](https://enterprise.cloud.eaglegis.co.nz/portal/home/notebook/notebook.html?id=cee4b83d8947404e801832d5db1c495d)
+
+---
+
+<img src="/static/assets/demo-guy.png" style={{ height: '400px' }} />
+
+## [Module Three](https://enterprise.cloud.eaglegis.co.nz/portal/home/notebook/notebook.html?id=1b62db40d4b64dcc905f91e52dea476d)
+
+---
+
+<img src="/static/assets/demo-guy.png" style={{ height: '400px' }} />
+
+## [Module Four](https://enterprise.cloud.eaglegis.co.nz/portal/home/notebook/notebook.html?id=bbebc756962941b1a3ccb60bca438e7e)
+
+---
+
+<img src="/static/assets/demo-guy.png" style={{ height: '400px' }} />
+
+## [Module Five](https://enterprise.cloud.eaglegis.co.nz/portal/home/notebook/notebook.html?id=9d5c7bdeaff64f32baf893d3bb5a61fd)
+
+---
+
+<img src="/static/assets/demo-guy.png" style={{ height: '400px' }} />
+
+## [Module Six](https://enterprise.cloud.eaglegis.co.nz/portal/home/notebook/notebook.html?id=4dce25997bd34cdab2e641bce1c441a4)
+
+---
+
+<img src="/static/assets/demo-guy.png" style={{ height: '400px' }} />
+
+## [Module Seven](https://enterprise.cloud.eaglegis.co.nz/portal/home/notebook/notebook.html?id=106b6769f0734bef9346dac5c3b52fce)
+
+---
+
+## Arcade
+
+---
+
+## What is Arcade
+
+Arcade is a portable, lightweight, and secure expression language written for use in the ArcGIS platform.
+
+---
+
+## Can create apps with it?
+
+Arcade is not designed for writing standalone apps. It is intended solely for evaluating embedded expressions
+
+---
+## Case Sensitivity
+
+Arcade is case insensitive
+
+---
+
+## Comments
+
+Can be set using the following syntax
+
+```javascript
+//This is a single-line comment
+
+/*
+This is a 
+multi-line comment
+*/
+```
+
+---
+
+## Global variables
+
+Global variables may be used in Arcade expressions depending on the execution profile:
+
+- ```$datastore```
+
+- ```$feature```
+
+- ```$layer```
+
+- ```$map```
+
+- ```$value```
+
+- ```$view.scale```
+
+---
+
+## Attribute Access
+
+You can access feature attributes as global variables using the ```$feature.fieldName``` syntax.
+
+```javascript 
+var percentCollege = Round(($feature.COLLEGE / $feature.POPULATION) * 100, 2);
+```
+
+---
+
+## Attribute Access
+
+Attribute values can be referenced using the ```.``` syntax or with square brackets.
+
+```javascript 
+Round(($feature["COLLEGE"] / $feature["POPULATION"]) * 100, 2);
+```
+
+---
+
+## Attribute Access
+
+You can also reference values from joined tables using this syntax: ```$feature["joinKey.fieldName"]```
+
+```javascript
+Round((($feature["COUNTY_ID.VOTED_DEM_2016"] - $feature["COUNTY_ID.VOTED_DEM_2012"]) / $feature["COUNTY_ID.VOTED_DEM_2012"]) * 100, 2);
+```
+
+---
+
+## If Statements
+
+IF statements may be used to support conditional logic in the script.
+
+```javascript
+function isOdd(value){
+  // Returns either 1 or 0.
+  // 1 = odd number
+  // 0 = even number
+  // Boolean() converts the raw value to a bool
+  var val = Boolean(value % 2);
+  if (val) {
+    return "Yes. This is odd."
+  }
+  else {
+    return "Nope. Not odd.";
+  }
+}
+```
+---
+
+## For Loops
+
+Looping is supported with ```for(initialization, condition, finalExpression){ // logic to execute }.```
+
+```javascript
+var result = 0;
+for(var z=0; z<100; z++) {
+  result += z;
+}
+return result; // returns 4950
+```
+
+---
+
+## Looping through arrays
+
+For loops can iterate through arrays.
+
+```javascript
+var myArray = [10,20,30];
+for(var k in myArray) {
+  n+=myArray[k];   // Note that K iterates through the index not the items
+}
+```
+
+---
+
+## Looping through dictionay keys
+
+For loops may also iterate through keys in a dictionary.
+
+```javascript
+var myDictionary = Dictionary("field1", 1, "field2", 2)
+for(var k in myDictionary) {
+  n+= myDictionary[k];   // Note that K will be "field1" and then "field2"
+}
+```
+
+---
+## Looping through a feature set
+
+And they may iterate through items in a FeatureSet.
+
+```javascript
+var sensitiveFeatures = Filter(publicLandFeatures, "class = 'sensitive'");
+var largeAreasPresent = false;
+for(var feature in sensitiveFeatures){
+  largeAreasPresent = IIF(feature.ACRES > 5000, true, largeAreasPresent);
+}
+```
+
+---
+
+## Exiting loops early
+
+Arcade also supports the ```break``` and ```continue``` statements. Using ```return``` inside the loop will exit the loop and function.
+
+```javascript
+for(var i=1; i<100; i++) {
+  if (i==3) continue;
+
+  if (i==5) break;
+    n+=i;
+}
+```
+---
+
+## User defined functions
+
+User defined functions are supported. Functions must be declared before they are used. Functions have local scope, meaning any variables defined in them will only exist during the call to the function.
+
+```javascript
+function adder(x, y) {
+  var result = x+y;
+  return result*10;
+}
+
+adder(10,2);
+```
+
+---
+
+## Global and local scope
+
+All variables declared at global scope will be available anywhere in the script
+
+Variables declared inside of functions can override global scope variables, while inside the function
+
+---
+
+```javascript
+var myglobal = 1;
+function useGlobal() {
+  var n = 10;    // n is only available inside of this function. ie. It is local scope.
+  return myglobal * n;    // will use the globally defined variable
+}
+
+function overrideGlobal() {
+  var myglobal = 1000;
+  return myglobal * 10;   // will use the locally defined variable
+}
+
+var z = overrideGlobal();   // will be 10000
+var k = useGlobal(); // will be 10
+return z+k;  // returns 10010
+```
+
+---
+
+## Variable scope
+
+Variables must be declared before use. Block level scoping is not supported. This means variables defined in For loops will be available outside of the loop.
+
+```javascript
+var myglobal = 1;
+for(var k=1; k<100; k++) {
+  var n=10;  // Defined in Block, but will be available outside of Block.
+}
+return k + n;  // Will return 110
+```
+
+---
+## Python Resources
+
+> [Python Guide](https://developers.arcgis.com/python/guide/overview-of-the-arcgis-api-for-python/)
+
+> [ArcGIS Enterprise Notebook server](https://enterprise.cloud.eaglegis.co.nz/)
+
+> [Sample Notebooks](https://developers.arcgis.com/python/sample-notebooks/)
+
+> [Automate the boring stuff](https://automatetheboringstuff.com/)
+
+> [GeoNet Community](https://community.esri.com/groups/arcgis-python-api)
+
+
+---
+
+## Arcade Resources
+
+> [Developers Site](https://developers.arcgis.com/arcade/)
+
+> [Arcade Function Reference](https://developers.arcgis.com/arcade/function-reference/)
+
+> [Arcade Playground](https://developers.arcgis.com/arcade/playground/)
+
+> [Code Snippet Repository](https://github.com/Esri/arcade-expressions/)

@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src"
+    "\\src",
+    "\\src\\code-samples",
+    "\\src\\code-samples\\python",
+    "\\src\\dist"
   ],
-  "SelectedNode": "\\src\\package.json",
+  "SelectedNode": "\\src\\deck.mdx",
   "PreviewInSolutionExplorer": false
 }
