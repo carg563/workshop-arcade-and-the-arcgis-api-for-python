@@ -101,6 +101,16 @@ export const themes = [highlight, theme];
 
 ---
 
+## There is a GitHub Repo for this
+
+We will put all Notebooks and Arcade snippets in to this at the end of the course.
+
+Feel free to fork it.
+
+[Repo] (https://github.com/carg563/workshop-arcade-and-the-arcgis-api-for-python)
+
+---
+
 ## Login details
 
 Your first initial followed by an _x_ and your last initial
@@ -160,6 +170,7 @@ arcgis.gis
  module provides an information model for GIS hosted within ArcGIS Online or Portal for ArcGIS. This module provides functionality to manage (create, read, update and delete) GIS users, groups and content. This module is the most important and provides the entry point into the GIS.
 
 ---
+
 ```python
 arcgis.env 
 ``` 
@@ -271,12 +282,6 @@ module allows you to manage some of the web based applications available in ArcG
 
 ---
 
-## Understanding Parameters
-
-<img src="/static/assets/understanding-parameters.png" style={{ height: '300px' }} />
-
----
-
 ## Troubleshooting Techniques
 
 <img src="/static/assets/trouble-shooting.png" style={{ height: '300px' }} />
@@ -290,6 +295,8 @@ module allows you to manage some of the web based applications available in ArcG
 - Responsible for cleaning up Enterprise
 
 - Need to do some clean up within the Enterprise
+
+- Manipulate features in a more effcient way
 
 
 ---
@@ -370,17 +377,15 @@ multi-line comment
 
 Global variables may be used in Arcade expressions depending on the execution profile:
 
-- ```$datastore```
+```$datastore```
 
-- ```$feature```
+```$feature```
 
-- ```$layer```
+```$layer```
 
-- ```$map```
+```$map```
 
-- ```$value```
-
-- ```$view.scale```
+```$value```
 
 ---
 
@@ -557,6 +562,73 @@ return k + n;  // Will return 110
 ```
 
 ---
+
+## Popups
+
+---
+
+## Visualisation
+
+---
+
+## Labeling
+
+---
+
+## Attribute Rules
+
+---
+
+## Rule Types
+
+- Calculation Rules
+
+- Constraint Rules
+
+- Validation Rules
+
+
+---
+
+## Calculation Rules
+
+Automatically populate fields in features
+
+Can be chained together
+
+Order is important!
+
+---
+
+## Constraints
+
+Constraints enforce certain conditions
+
+Do not update fields like attribute rules
+
+Must return a true or false result
+
+---
+
+## Validation Rules
+
+Specify permitted values on attrbutes
+
+Offers greater flexability than the domain and subtype model
+
+Only available on an Enterprise GDB
+
+---
+
+## Validation Rules Example
+
+Concatenate an array of text field values into a specified field.
+
+
+When a pipe's LifeCycleStatus is updated to Abandoned, the PressureZone attribute is updated to None.
+
+---
+
 ## Python Resources
 
 > [Python Guide](https://developers.arcgis.com/python/guide/overview-of-the-arcgis-api-for-python/)
