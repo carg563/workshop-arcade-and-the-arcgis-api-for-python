@@ -329,7 +329,7 @@ module allows you to manage some of the web based applications available in ArcG
 
 ## [Module Six](https://enterprise.cloud.eaglegis.co.nz/portal/home/notebook/notebook.html?id=4dce25997bd34cdab2e641bce1c441a4)
 
-[csv's](https://app.box.com/s/c622b85v6dm3vzk762s9276kqtu1otpf)
+[CSV's](https://app.box.com/s/c622b85v6dm3vzk762s9276kqtu1otpf)
 
 ---
 
@@ -354,9 +354,35 @@ Arcade is a portable, lightweight, and secure expression language written for us
 Arcade is not designed for writing standalone apps. It is intended solely for evaluating embedded expressions
 
 ---
+
+## Execution Profiles
+
+Arcade behaves differently depending on where you are using it. 
+
+This behaviour is called the execution profile.
+
+[Execution Profiles](https://developers.arcgis.com/arcade/guide/profiles/)
+
+---
+
+## Execution Profiles
+
+The profiles are function are available in are highlighted in the reference.
+
+<img src="/static/assets/profiles.png" style={{ height: '250px' }} />
+
+
+---
+
 ## Case Sensitivity
 
 Arcade is case insensitive
+
+``` featuresetbyname() ```
+
+is the same as 
+
+``` FeatureSetByName() ```
 
 ---
 
@@ -391,6 +417,57 @@ Global variables may be used in Arcade expressions depending on the execution pr
 
 ---
 
+## Feature Sets
+
+As the name suggests, are a set of features.  How many features will depend on your data and the functions used in the expression
+
+---
+
+```$map``` 
+
+Allows you define a FeatureSet from a Feature Layer (from a feature service) that is in your map
+
+```FeatureSetByName($map, "Urban Forestry")```
+
+---
+
+```$datastore```
+
+Allows you to define a FeatureSet from any sub-layer of the Feature Layer that you’re currently working with in the Arcade editor
+
+```FeatureSetByName($datastore, "Area_Unit_2015_V1_00_Clipped")```
+
+---
+
+```$layer```
+
+Allows you to define a FeatureSet from the current layer being worked with in the Arcade editor
+
+---
+
+## Best Practice with FeatureSet
+
+1. Define the minimum needed FeatureSets required to do the job
+
+2. Always reduce your FeatureSets when you can
+
+3. Filtering by attributes will always be faster than filtering by geometry
+
+4. Chain functions together when possible to reduce queries
+
+5. Use stats and sorting to avoid unnecessary loops
+
+---
+
+## More details on FeatureSets
+
+[Function Reference](https://developers.arcgis.com/arcade/function-reference/data_functions/#featuresetbyname)
+
+[Feature Sets Part 1](https://www.esri.com/arcgis-blog/products/arcgis-online/mapping/whats-new-with-arcade-taking-a-stroll-through-featuresets-part-1/)
+
+[Feature Sets Part 2](https://www.esri.com/arcgis-blog/products/arcgis-online/mapping/whats-new-with-arcade-taking-a-stroll-through-featuresets-part-2/)
+
+---
 ## Attribute Access
 
 You can access feature attributes as global variables using the ```$feature.fieldName``` syntax.
@@ -423,7 +500,7 @@ Round((($feature["COUNTY_ID.VOTED_DEM_2016"] - $feature["COUNTY_ID.VOTED_DEM_201
 
 ## If Statements
 
-IF statements may be used to support conditional logic in the script.
+If statements may be used to support conditional logic in the script.
 
 ```javascript
 function isOdd(value){
@@ -565,11 +642,64 @@ for(var k=1; k<100; k++) {
 return k + n;  // Will return 110
 ```
 
+
 ---
 
 ## Popups
 
+Arcade can be used to aggregate numbers, create virtual fields and show details from other layers.
+
 ---
+
+## Best Practice in Popups
+
+**Avoid iterating through all features in a layer.** 
+
+This action requires the expression to fetch all features from the service. The query itself can be slow, and depending on how many features are in your layer, the iteration can slow things down as well.
+
+---
+## Best Practice in Popups
+
+**Chain functions as much as possible.**
+
+If you can reduce two or three requests down to one via chaining, then do it! Limiting the number of trips to the server will keep the app more useable.
+
+---
+
+## Best Practice in Popups
+
+**Keep the expression as simple as possible.** 
+
+Using seven geometry functions in a complex 100-line expression may make you feel like an Arcade ninja, but it could cause your users to spend extra time waiting for popup content to show up while unnecessary processing takes place behind the scenes. Geometry operations can be especially slow if you are working with complex features with many vertices.
+
+---
+
+## Best Practice in Popups
+
+**Keep the expression as simple as possible.** 
+
+Using seven geometry functions in a complex 100-line expression may make you feel like an Arcade ninja, but it could cause your users to spend extra time waiting for popup content to show up while unnecessary processing takes place behind the scenes. Geometry operations can be especially slow if you are working with complex features with many vertices.
+
+
+---
+
+## Best Practice in Popups
+
+**If you don’t need it, don’t request it!**
+
+If you’re creating a Feature Set, only request the fields you need. If you’re not using geometry functions, then be sure to exclude geometries from the feature set. Small details like this can go a long way in improving performance.---
+
+---
+
+## Example on HTML and Arcade
+
+[Click Me!](https://www.esri.com/arcgis-blog/products/arcgis-online/mapping/combining-arcade-and-html-for-a-real-life-pop-up-display/)
+
+---
+
+## Field Calculations
+
+The ability to calculate fields in ArcGIS Online has been possible with SQL, which is great for large or synced datasets. However, calculating with Arcade is easy to learn, allows for more flexibility than SQL, and utilizes geospatial capabilities.
 
 ---
 

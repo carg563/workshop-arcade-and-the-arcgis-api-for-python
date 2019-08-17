@@ -21,8 +21,8 @@ const Provider = ({ children }) => {
                     <TopNavLink href={getLink(16)} active={isActive([16, 37])}>Python</TopNavLink>
                     <TopNavLink href={getLink(38)} active={isActive([38, 40])}>Benefits</TopNavLink>
                     <TopNavLink href={getLink(41)} active={isActive([41, 47])}>Tasks</TopNavLink>
-                    <TopNavLink href={getLink(48)} active={isActive([48, 75])}>Arcade</TopNavLink>
-                    <TopNavLink href={getLink(76)} active={isActive([76, 1000])}>Resources</TopNavLink>
+                    <TopNavLink href={getLink(48)} active={isActive([48, 91])}>Arcade</TopNavLink>
+                    <TopNavLink href={getLink(91)} active={isActive([92, 1000])}>Resources</TopNavLink>
                 </TopNavList>            
             </TopNav>
             {children}

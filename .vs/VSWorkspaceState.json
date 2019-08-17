@@ -3,9 +3,11 @@
     "",
     "\\src",
     "\\src\\code-samples",
+    "\\src\\code-samples\\arcade",
     "\\src\\code-samples\\python",
-    "\\src\\dist"
+    "\\src\\code-samples\\python\\notebooks",
+    "\\src\\snippets"
   ],
-  "SelectedNode": "\\src\\deck.mdx",
+  "SelectedNode": "\\src\\code-samples\\python\\notebooks",
   "PreviewInSolutionExplorer": false
 }
