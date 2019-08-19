@@ -6,3 +6,7 @@
 This repo contains the raw slides and the content from the workshop.
 
 The snippets folder contains all the code snippets that we used within the workshop, plus some added extras. We will keep adding to this content to use it as a repository for any interesting exmamples that we come across.
+
+Access the samples here
+
+[Samples](https://github.com/carg563/workshop-arcade-and-the-arcgis-api-for-python/tree/master/src/code-samples)
