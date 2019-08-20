@@ -1,0 +1,23 @@
+// The fields from which to calculate margin of victory.
+// Each item in the array must reference a field global variable
+// OR an arcade expression that returns a number
+// Replace the field names in ALL CAPS with
+// the competing fields in your layer
+
+var fields = [
+  $feature.FIELD_NAME_1,
+  $feature.FIELD_NAME_2
+  // e.g. $feature.CATEGORY3_A + $feature.CATEGORY3_B,
+  // $feature.CATEGORY4
+
+  // ADD MORE FIELDS AS NECESSARY
+];
+
+// Returns the gap, or margin of victory, between the 
+// predominant field and the second highest value
+
+var top2 = Top(Reverse(Sort(fields)), 2);
+var winner = First(top2);
+var secondPlace = top2[1];
+var total = Sum(fields);
+return Round(((winner - secondPlace) / total) * 100, 2);

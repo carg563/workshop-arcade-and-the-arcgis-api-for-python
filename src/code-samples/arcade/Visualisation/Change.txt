@@ -1,0 +1,6 @@
+//Create variable change that calculates the difference between the most recent year (year 1) and year 2.
+var change = $feature.FIELD_NAME_YEAR1-$feature.FIELD_NAME_YEAR2
+
+//When the change or difference is greater than zero, this will be categorized as an increase, 
+//but when the change is less than zero, it will be categorized as a decrease. Optionally, you can change null to "No Change". 
+When (change > 0, "DESCRIBE INCREASE", change < 0, "DESCRIBE DECREASE", null)

@@ -1,0 +1,5 @@
+
+var bufferedGeometry = Buffer($feature, $feature.<bufferfield>, 'meters')
+var TargetDataset = FeatureSetByName($datastore, "Area_Unit_2015_V1_00_Clipped");
+var IntersectedFeature = Intersects(TargetDataset, bufferedGeometry));
+return IntersectedFeature

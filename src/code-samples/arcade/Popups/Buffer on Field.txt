@@ -1,0 +1,11 @@
+Buffer($feature, 0.5, 'meters')
+/*Options for the distance unit include
+feet
+kilometers
+miles
+meters
+yards
+*/
+
+// If you want to use a field to buffer with 
+Buffer($feature, $feature.<bufferfield>, 'meters')

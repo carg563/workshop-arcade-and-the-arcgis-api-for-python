@@ -1,0 +1,2 @@
+// To get the domain name of a coded domain field
+DomainName($feature, 'theField');

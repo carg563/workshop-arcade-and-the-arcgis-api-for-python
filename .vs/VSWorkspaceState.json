@@ -3,11 +3,8 @@
     "",
     "\\src",
     "\\src\\code-samples",
-    "\\src\\code-samples\\arcade",
-    "\\src\\code-samples\\python",
-    "\\src\\code-samples\\python\\notebooks",
     "\\src\\snippets"
   ],
-  "SelectedNode": "\\src\\code-samples\\python\\notebooks",
+  "SelectedNode": "\\src\\Provider.js",
   "PreviewInSolutionExplorer": false
 }

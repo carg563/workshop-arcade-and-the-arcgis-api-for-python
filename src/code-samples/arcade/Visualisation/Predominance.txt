@@ -1,0 +1,35 @@
+// The fields from which to calculate predominance.
+// The `value` property must reference a field global variable
+// OR an arcade expression that returns a number
+// Replace the field names and aliases in ALL CAPS with
+// the competing fields in your layer
+
+var fields = [
+  { value: $feature.FIELD_NAME_1, alias: "DESCRIBE FIELD_NAME_1 HERE" },
+  { value: $feature.FIELD_NAME_2, alias: "DESCRIBE FIELD_NAME_2 HERE" },
+
+  // e.g. { value: $feature.REPUB_VOTES, alias: "Republican Candidate" }
+  // ADD MORE FIELDS AS NECESSARY
+];
+
+// Returns the predominant category as the alias
+// defined in the fields array. If there is a tie,
+// then both names are concatenated and used to
+// indicate the tie
+
+function getPredominantCategory(fieldsArray){
+  var maxValue = -Infinity;
+  var maxCategory = "";
+  for(var k in fieldsArray){
+    if(fieldsArray[k].value > maxValue){
+      maxValue = fieldsArray[k].value;
+      maxCategory = fieldsArray[k].alias;
+    } else if (fieldsArray[k].value == maxValue){
+      maxCategory = maxCategory + "/" + fieldsArray[k].alias;
+    }
+  }
+  // totals should exceed zero in predominance visualizations
+  return IIF(maxValue <= 0, "none", maxCategory);
+}
+
+getPredominantCategory(fields);
