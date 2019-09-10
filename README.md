@@ -5,7 +5,7 @@
 
 This repo contains the raw slides and the content from the workshop.
 
-The code samples folder contains all the code snippets that we used within the workshop, plus some added extras. We will keep adding to this content to use it as a repository for any interesting exmamples that we come across.
+The code samples folder contains all the code snippets that we used within the workshop, plus some added extras. We will keep adding to this content to use it as a repository for any interesting examples that we come across.
 
 Access the samples here
 
